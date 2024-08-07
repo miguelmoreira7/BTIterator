@@ -3,9 +3,11 @@ package tree;
 
 import iterator.*;
 
-public class BinarySearchTree <T extends Comparable<T>> implements Tree  {
+public class BinarySearchTree <T extends Comparable<T>> implements Tree, Prototype<BinarySearchTree<T>> {
     private Node<T> root;
-    
+
+	public BinarySearchTree(){this.root = null;}
+
     public BinarySearchTree( T value) {
     	this.root = new Node<T>(value);
     }
@@ -249,5 +251,12 @@ public class BinarySearchTree <T extends Comparable<T>> implements Tree  {
 		
 	}
 
+	public BinarySearchTree<T> clone(){
+		BinarySearchTree<T> clonedBst = new BinarySearchTree<>(null);
+		if(this.root != null){
+			clonedBst.root = this.root.clone();
+		}
+		return clonedBst;
+	}
 
 }

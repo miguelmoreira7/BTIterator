@@ -8,7 +8,7 @@ package tree;
  *
  * @param <T>
  */
-public class Node<T extends Comparable<T>> {
+public class Node<T extends Comparable<T>> implements Prototype <Node<T>>{
     T value;
     Node<T> left;
     Node<T> right;
@@ -35,6 +35,17 @@ public class Node<T extends Comparable<T>> {
         //provide implementation here
         //See effective java for appropriate implementation conditions
     	return this.value.compareTo(otherNode.value);
+    }
+
+    public Node<T> clone(){
+        Node<T> clonedNode = new Node<>(this.value);
+        if (this.left != null){
+            clonedNode.left = this.left.clone();
+        }
+        if (this.right != null){
+            clonedNode.right = this.right.clone();
+        }
+        return clonedNode;
     }
 }
 
