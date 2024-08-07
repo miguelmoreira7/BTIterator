@@ -23,14 +23,32 @@ public class Main {
         bst.add(7);
         bst.add(13);
 
+        //Clonar arvore
+        BinarySearchTree<Integer> clonedBst = bst.clone();
+
+        //Add 20 na Árvore Original
+        bst.add(20);
+
         //Iterador pré ordem
         System.out.println("Pré ordem:");
         PreOrderIterator<Integer> preOrder = new PreOrderIterator<>(bst);
         while (preOrder.hasNext()) {
             System.out.println(preOrder.getNext());
         }
+        System.out.println();
+        System.out.println("Árvore Original");
         bst.preorder();
         System.out.println();
+
+        PreOrderIterator<Integer> preOrderClone = new PreOrderIterator<>(clonedBst);
+        while (preOrderClone.hasNext()) {
+            System.out.println(preOrderClone.getNext());
+        }
+        System.out.println();
+        System.out.println("Árvore Clone Pré ordem:");
+        clonedBst.preorder();
+        System.out.println();
+
 
         //Iterador em ordem
         System.out.println("Em ordem");
