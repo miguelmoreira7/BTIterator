@@ -24,49 +24,73 @@ public class Main {
         bst.add(13);
 
         //Clonar arvore
-        BinarySearchTree<Integer> clonedBst = bst.clone();
+        BinarySearchTree<Integer> clonedBst = (BinarySearchTree<Integer>) bst.clone();
 
-        //Add 20 na Árvore Original
+        //Add 20 na Árvore Original e Delete 10 na Clone
         bst.add(20);
+        clonedBst.delete(10);
 
-        //Iterador pré ordem
-        System.out.println("Pré ordem:");
+        //Iterador pré ordem ORIGINAL
+        System.out.println("Pré ordem original:");
         PreOrderIterator<Integer> preOrder = new PreOrderIterator<>(bst);
         while (preOrder.hasNext()) {
             System.out.println(preOrder.getNext());
         }
         System.out.println();
-        System.out.println("Árvore Original");
+
+        //ORIGINAL
+        System.out.println("Árvore Original Pré ordem");
         bst.preorder();
         System.out.println();
 
-        PreOrderIterator<Integer> preOrderClone = new PreOrderIterator<>(clonedBst);
-        while (preOrderClone.hasNext()) {
-            System.out.println(preOrderClone.getNext());
-        }
-        System.out.println();
+
+        //CLONE
         System.out.println("Árvore Clone Pré ordem:");
         clonedBst.preorder();
         System.out.println();
 
+        //Adicionar 100 Original Remover 1 Clone
+        bst.add(100);
+        clonedBst.delete(1);
 
-        //Iterador em ordem
-        System.out.println("Em ordem");
+        //Iterador em ordem ORIGINAL
+        System.out.println("Em ordem original");
         InOrderIterator<Integer> inOrder = new InOrderIterator<>(bst);
         while (inOrder.hasNext()) {
             System.out.println(inOrder.getNext());
         }
+
+        //ORIGINAL
+        System.out.println("Árvore Original Em ordem");
         bst.inorder();
         System.out.println();
 
-        //Iterador pós ordem
-        System.out.println("Pós ordem");
+        //CLONE
+        System.out.println("Árvore Clone Em ordem:");
+        clonedBst.inorder();
+        System.out.println();
+
+        //Adicionar 2 Original Remover 6 Clone
+        bst.add(2);
+        clonedBst.delete(6);
+
+        //Iterador pós ordem ORIGINAL
+        System.out.println("Pós ordem original");
         PostOrderIterator<Integer> postOrder = new PostOrderIterator<>(bst);
         while (postOrder.hasNext()) {
             System.out.println(postOrder.getNext());
         }
+
+        //ORIGINAL
+        System.out.println("Árvore Original Pós ordem");
         bst.postorder();
         System.out.println();
+
+        //CLONE
+        System.out.println("Árvore Clone Pós ordem");
+        clonedBst.postorder();
+        System.out.println();
+
 
         //Iterador por ordem de altura
         System.out.println("Ordem de altura");

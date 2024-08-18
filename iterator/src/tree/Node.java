@@ -8,7 +8,7 @@ package tree;
  *
  * @param <T>
  */
-public class Node<T extends Comparable<T>> implements Prototype <Node<T>>{
+public class Node<T extends Comparable<T>> implements Prototype{
     T value;
     Node<T> left;
     Node<T> right;
@@ -17,6 +17,16 @@ public class Node<T extends Comparable<T>> implements Prototype <Node<T>>{
         this.value = value;
         right = null;
         left = null;
+    }
+
+    Node(Node<T> that) {
+        this.value = that.value;
+        if (that.left != null) {
+            this.left = (Node<T>) that.left.clone();
+        }
+        if (that.right != null) {
+            this.right = (Node<T>) that.right.clone();
+        }
     }
     
     public String toString() {
@@ -32,20 +42,16 @@ public class Node<T extends Comparable<T>> implements Prototype <Node<T>>{
     }
 
     public int compareTo(Node<T> otherNode) {
+        if (otherNode == null) {
+            throw new NullPointerException("O nó comparado não pode ser null");
+        }
         //provide implementation here
         //See effective java for appropriate implementation conditions
     	return this.value.compareTo(otherNode.value);
     }
 
-    public Node<T> clone(){
-        Node<T> clonedNode = new Node<>(this.value);
-        if (this.left != null){
-            clonedNode.left = this.left.clone();
-        }
-        if (this.right != null){
-            clonedNode.right = this.right.clone();
-        }
-        return clonedNode;
+    public Prototype clone() {
+        return new Node<>(this);
     }
 }
 
