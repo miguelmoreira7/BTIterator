@@ -3,7 +3,7 @@ package tree;
 
 import iterator.*;
 
-public class BinarySearchTree <T extends Comparable<T>> implements Tree, Prototype<BinarySearchTree<T>> {
+public class BinarySearchTree <T extends Comparable<T>> implements Tree, Prototype {
     private Node<T> root;
 
 	public BinarySearchTree(){this.root = null;}
@@ -12,7 +12,11 @@ public class BinarySearchTree <T extends Comparable<T>> implements Tree, Prototy
     	this.root = new Node<T>(value);
     }
 
-    @Override
+	BinarySearchTree(BinarySearchTree<T> that) {
+		this.root = (Node<T>) that.root.clone();
+	}
+
+	@Override
 	public Node<T> getRoot(){
     	return (root != null? root : null);
     }
@@ -94,7 +98,6 @@ public class BinarySearchTree <T extends Comparable<T>> implements Tree, Prototy
 	 */
 	public T delete(T key)
 	{
-
 		T node =  search( key);
 		if (node != null) {
 			this.root = delete(root, key);
@@ -251,12 +254,8 @@ public class BinarySearchTree <T extends Comparable<T>> implements Tree, Prototy
 		
 	}
 
-	public BinarySearchTree<T> clone(){
-		BinarySearchTree<T> clonedBst = new BinarySearchTree<>(null);
-		if(this.root != null){
-			clonedBst.root = this.root.clone();
-		}
-		return clonedBst;
+	public Prototype clone(){
+		return new BinarySearchTree<>(this);
 	}
 
 }
